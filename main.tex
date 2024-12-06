@@ -1,0 +1,29 @@
+%!tex program = lualatex
+
+%% set documentclass
+\documentclass[a4paper,11pt,svgnames,oneside]{book}
+
+%% e-tex tools for latex
+\usepackage{etoolbox}
+
+%% does the document contain at least one citation?  (true / false)
+\newtoggle{citations} \settoggle{citations}{false}
+
+%% define path for references
+\def\thebibpath{references.bib}
+
+
+\input{Preambles/pre_0_packages.tex}    %% load packages
+
+
+\begin{document}
+
+%% title page
+\input{Content/titlepage.tex}
+
+
+% \tableofcontents
+% \mainmatter
+\chapter{ok}
+hallo
+\end{document}
