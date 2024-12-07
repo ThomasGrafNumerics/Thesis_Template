@@ -1,8 +1,8 @@
 % An alternative to babel for XeLaTeX and LuaLaTeX. [LOAD BEFORE BIBLATEX]
-% set your language of choice
 \usepackage{polyglossia}
 \setdefaultlanguage[babelshorthands=true]{german}
-% \setdefaultlanguage[babelshorthands=true]{english}
+\ifnumequal{\languageToggle}{1}{\setdefaultlanguage{english}}{}
+
 
 % Extensive support for hypertext in LaTeX
 \usepackage{hyperref}
@@ -12,6 +12,12 @@
 	urlcolor={blue!90!black},
 	citecolor=,
 }
+
+% Run a document through LaTeX for syntax checking
+% \usepackage{syntonly}
+
+% Draw a page-layout diagram
+% \usepackage{showframe}
 
 % Advanced font selection in XeLaTeX and LuaLaTeX
 \usepackage{fontspec}
@@ -79,6 +85,14 @@
 % Intermix single and multiple columns
 \usepackage{multicol}
 
+% This package provides macros to insert playing cards, single, or hand, or random-hand, Poker or French Tarot or Uno, from png files.
+\usepackage{JeuxCartes}
+
+% Selective filtering of error messages and warnings
+\usepackage{silence}
+\WarningFilter{latex}{`!h' float specifier changed to `!ht'}
+\WarningFilter{latex}{`h' float specifier changed to `ht'}
+
 % Create PostScript and PDF graphics in TeX
 \usepackage{tikz}
 
@@ -140,6 +154,9 @@
 % Horizontally columned lists
 \usepackage{tasks}
 
+% Typeset exercises, problems, etc. and their answers
+\usepackage{exercise}
+
 % Draw visual representations of matrices in LaTeX
 \usepackage{drawmatrix}
 
@@ -183,30 +200,32 @@
 	\addbibresource{\thebibpath} % [PATH]
 }{}
 
-% Extensive control of page headers and footers in LaTeX2ε
-\usepackage{fancyhdr}
-% Alternative headings for toc/lof/lot
-\usepackage{titletoc}
+% load packge if documentclass is book or article
+\ifboolexpr{togl {book} or togl {article}}{
+	% Extensive control of page headers and footers in LaTeX2ε
+	\usepackage{fancyhdr}
+	% Alternative headings for toc/lof/lot
+	\usepackage{titletoc}
+}{}
 
-% Flexible and complete interface to document dimensions
-\usepackage[a4paper,bindingoffset=0mm,left=22mm,right=22mm,top=25mm,bottom=30mm,footskip=14mm]{geometry}
-
-% This package provides user control over the layout of the three basic list environments: enumerate, itemize and description.
-\usepackage[shortlabels, inline]{enumitem}
-\setlist{nolistsep} % smaller spacing in lists
-
-% Control table of contents, figures, etc
-\usepackage{tocloft}
-
-% A package for producing multiple indexes
-\usepackage{imakeidx}
-\makeindex[columns=3, title=Index, intoc]
-
-% Intelligent cross-referencing. [LOAD AFTER \hypersetup AND amsmath]
-\usepackage[nameinlink,noabbrev,capitalise]{cleveref}
-
-% Simply changing \parskip and \parindent leaves a layout that is untidy; this package (though it is no substitute for a properly-designed class) helps alleviate this untidiness.
-\usepackage{parskip}
+% load package if documentclass is not a beamer presentation
+\nottoggle{beamer}{
+	% Flexible and complete interface to document dimensions
+	\usepackage[a4paper,bindingoffset=0mm,left=22mm,right=22mm,top=25mm,bottom=30mm,footskip=14mm]{geometry}
+	% This package provides user control over the layout of the three basic list environments: enumerate, itemize and description.
+	\usepackage[shortlabels, inline]{enumitem}
+	\setlist{nolistsep} % smaller spacing in lists
+	% Control table of contents, figures, etc
+	\usepackage{tocloft}
+	% A package for producing multiple indexes
+	\usepackage{imakeidx}
+	\makeindex[columns=3, title=Index, intoc]
+	% Intelligent cross-referencing. [LOAD AFTER \hypersetup AND amsmath]
+	\usepackage[nameinlink,noabbrev,capitalise]{cleveref}
+	% Simply changing \parskip and \parindent leaves a layout that is untidy; this package (though it is no substitute for a properly-designed class) helps alleviate this untidiness.
+	\usepackage{parskip}
+	% Access metadata from the git distributed version control system
+}{}
 
 % Completely customisable TOCs
 \usepackage{etoc} % [LOAD AFTER tocloft]

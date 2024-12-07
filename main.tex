@@ -1,29 +1,80 @@
-%!tex program = lualatex
+%!TeX program = lualatex
 
-%% set documentclass
+% choose document class (book / article / exam / beamer)
+%% BOOK
 \documentclass[a4paper,11pt,svgnames,oneside]{book}
+% \documentclass[a4paper,11pt,svgnames,exerciseonly,oneside]{book}
 
-%% e-tex tools for latex
+%% ARTICLE
+% \documentclass[svgnames,hyphens]{article}
+
+%% EXAM
+% \documentclass[11pt,addpoints,svgnames]{exam}
+% \documentclass[11pt,addpoints,answers,svgnames]{exam}
+
+%% BEAMER
+% \documentclass[xcolor={table,dvipsnames,svgnames},hyphens]{beamer}
+% \documentclass[xcolor={table,dvipsnames,svgnames},hyphens,handout]{beamer}
+
+%% e-TeX tools for LaTeX
 \usepackage{etoolbox}
 
+%% set toggles (switches) for the document class
+\newtoggle{book} \newtoggle{article} \newtoggle{exam} \newtoggle{beamer} \newtoggle{teacherToggle} %% default value is 'false'
+
+\def\documentToggle{0} %% <---- choose number
+\ifnumequal{\documentToggle}{0}{\settoggle{book}{true}}{}     %% book (0)
+\ifnumequal{\documentToggle}{1}{\settoggle{article}{true}}{}  %% article (1)
+\ifnumequal{\documentToggle}{2}{\settoggle{exam}{true}}{}     %% exam (2)
+\ifnumequal{\documentToggle}{3}{\settoggle{beamer}{true}}{}   %% beamer (3)
+
 %% does the document contain at least one citation?  (true / false)
-\newtoggle{citations} \settoggle{citations}{false}
+\newtoggle{citations} \settoggle{citations}{true}
 
 %% define path for references
 \def\thebibpath{references.bib}
 
+%% select the document's language
+\newtoggle{german} \newtoggle{english}
+\def\languageToggle{0}
+\ifnumequal{\languageToggle}{0}{\settoggle{german}{true}}{} %% german
+\ifnumequal{\languageToggle}{1}{\settoggle{english}{false}}{} %% english
 
-\input{Preambles/pre_0_packages.tex}    %% load packages
-
+\input{Preambles/pre_0_packages}    %% loading packages
+\input{Preambles/pre_1_options}     %% settings and various options for packages
+\input{Preambles/pre_2_macros}      %% macros
+\input{Preambles/pre_3_tikz}        %% tikz related contents
+\input{Preambles/pre_4_custom_envs} %% custom environments
 
 \begin{document}
+%% BOOK
+\iftoggle{book} {%
+	% write a book
 
-%% title page
-\input{Content/titlepage.tex}
+	% titlepage
+	\input{titlepage.tex}
+	% toc
+	\tableofcontents
 
+	% main contents 
+	\mainmatter
 
-% \tableofcontents
-% \mainmatter
-\chapter{ok}
-hallo
+	\part{Teil 1: Verwendung der Vorlage}
+	\input{Content/Book/chapter_01.tex}
+} {}
+
+%% ARTICLE
+\iftoggle{article} {%
+	% write an article
+} {}
+
+%% EXAM
+\iftoggle{exam} {%
+	% write an exam
+} {}
+
+%% BEAMER
+\iftoggle{beamer} {%
+	% create a beamer presentation (slides)
+} {}
 \end{document}
