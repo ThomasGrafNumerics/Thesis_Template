@@ -36,9 +36,9 @@
 
 %% select the document's language
 \newtoggle{german} \newtoggle{english}
-\def\languageToggle{0}
+\def\languageToggle{1}
 \ifnumequal{\languageToggle}{0}{\settoggle{german}{true}}{} %% german
-\ifnumequal{\languageToggle}{1}{\settoggle{english}{false}}{} %% english
+\ifnumequal{\languageToggle}{1}{\settoggle{english}{true}}{} %% english
 
 \input{Preambles/pre_0_packages}    %% loading packages
 \input{Preambles/pre_1_options}     %% settings and various options for packages
@@ -51,16 +51,12 @@
 \iftoggle{book} {%
 	% write a book
 
-	% titlepage
-	\input{titlepage.tex}
 	% toc
 	\tableofcontents
 
 	% main contents 
 	\mainmatter
-
-	\part{Teil 1: Verwendung der Vorlage}
-	\input{Content/Book/chapter_01.tex}
+	\input{Content/Book/chapter_01.tex} % How to use this setup
 } {}
 
 %% ARTICLE
