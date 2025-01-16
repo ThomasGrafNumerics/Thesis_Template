@@ -40,11 +40,11 @@
 \ifnumequal{\languageToggle}{0}{\settoggle{german}{true}}{} %% german
 \ifnumequal{\languageToggle}{1}{\settoggle{english}{true}}{} %% english
 
-\input{Preambles/pre_0_packages}    %% loading packages
-\input{Preambles/pre_1_options}     %% settings and various options for packages
-\input{Preambles/pre_2_macros}      %% macros
-\input{Preambles/pre_3_tikz}        %% tikz related contents
-\input{Preambles/pre_4_custom_envs} %% custom environments
+\input{preambles/pre_0_packages}    %% loading packages
+\input{preambles/pre_1_options}     %% settings and various options for packages
+\input{preambles/pre_2_macros}      %% macros
+\input{preambles/pre_3_tikz}        %% tikz related contents
+\input{preambles/pre_4_custom_envs} %% custom environments
 
 \begin{document}
 %% BOOK
@@ -56,7 +56,10 @@
 
 	% main contents 
 	\mainmatter
-	\input{Content/Book/chapter_01.tex} % How to use this setup
+	\input{book_chapter_01.tex} % How to use this setup
+
+	\clearpage
+	\printindex
 } {}
 
 %% ARTICLE
