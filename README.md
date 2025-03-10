@@ -7,17 +7,18 @@
 
 ## Table of Contents
 
-- [Build](#build)
-- [Why Does This Exist](#why)
+- [Build](#compilation)
+- [Why Does This Exist?](#why)
 
-## <a id="build"></a>Build
+## <a id="compilation"></a>Build
 First, make sure that you are using the latest [TeX distribution]([https://scoop.sh](https://www.latex-project.org/get/)) for your system.
 
-To build your project, run:
+To compile your project, run:
 ```bash
     lualatex -synctex=1 -interaction=nonstopmode main.tex
     biber main
     lualatex -synctex=1 -interaction=nonstopmode main.tex
     lualatex -synctex=1 -interaction=nonstopmode main.tex
 ```
+
 ## <a id="why"></a>Why Does This Exist?
