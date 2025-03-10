@@ -1,0 +1,50 @@
+\newtoggle{withbonus} \togglefalse{withbonus} % set true to show bonus points in grade table
+
+% setting underlying course name
+\newcommand{\mycourse}{the best course ever}
+% name of the class
+\newcommand{\myclass}{class 101}
+% set date
+\newcommand{\mydate}{\today}
+
+\title{\textbf{exam title}}
+\author{Donald E. Knuth, Ph.D.\\
+	\mycourse, \myclass}
+\date{\mydate}
+\maketitle
+\thispagestyle{headandfoot}
+
+\begin{center}
+	\fbox{\parbox{140mm}{\centering
+			\begin{itemize}
+				\item exam duration: $15$ minutes
+				\item open book
+			\end{itemize}}}
+\end{center}
+\vspace{10mm}
+
+\begin{center}
+	first name: \rule{45mm}{0.8pt}\qquad last name: \rule{45mm}{0.8pt}
+\end{center}
+\vspace{20mm}
+
+\begin{center}
+	\iftoggle{withbonus} {
+		\combinedgradetable[h][questions]
+	} {
+		\gradetable[h][questions]
+	}
+\end{center}
+\vspace{15mm}
+\begin{center}
+	grade:
+	\vspace{10mm}
+
+	\rule{8mm}{1.2pt}
+\end{center}
+%\thispagestyle{empty}
+\clearpage
+
+\begin{questions}
+	\question[3] Let's start with an easy question.
+\end{questions}

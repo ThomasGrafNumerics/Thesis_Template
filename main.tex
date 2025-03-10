@@ -1,0 +1,71 @@
+%!TeX program = lualatex
+
+% choose document class (book / article / exam / beamer / flashcards)
+%% BOOK
+% \documentclass[a4paper,11pt,svgnames,exerciseonly,oneside]{book}
+\documentclass[a4paper,11pt,svgnames,oneside]{book}
+
+% ARTICLE
+% \documentclass[svgnames,hyphens]{article}
+
+%% EXAM
+% \documentclass[11pt,addpoints,svgnames]{exam}
+% \documentclass[11pt,addpoints,answers,svgnames]{exam}
+
+%% BEAMER
+% \documentclass[xcolor={table,dvipsnames,svgnames},hyphens,handout]{beamer}
+% \documentclass[xcolor={table,dvipsnames,svgnames},hyphens]{beamer}
+
+%% e-TeX tools for LaTeX
+\usepackage{etoolbox}
+
+%% set toggles (switches) for the document class
+\newtoggle{book} \newtoggle{article} \newtoggle{exam} \newtoggle{beamer} \newtoggle{flashcards} %% default value is 'false'
+
+\def\documentToggle{0} %% <---- choose number
+\ifnumequal{\documentToggle}{0}{\settoggle{book}{true}}{}     %% book (0)
+\ifnumequal{\documentToggle}{1}{\settoggle{article}{true}}{}  %% article (1)
+\ifnumequal{\documentToggle}{2}{\settoggle{exam}{true}}{}     %% exam (2)
+\ifnumequal{\documentToggle}{3}{\settoggle{beamer}{true}}{}   %% beamer (3)
+
+%% does the document contain at least one citation?  (true / false)
+\newtoggle{citations} \settoggle{citations}{true}
+
+%% define path for references
+\def\thebibpath{refs.bib}
+
+%% set language
+\newtoggle{german} \newtoggle{english}
+\def\languageToggle{1}
+\ifnumequal{\languageToggle}{0}{\settoggle{german}{true}}{} %% german
+\ifnumequal{\languageToggle}{1}{\settoggle{english}{true}}{} %% english
+
+% preambles
+\input{Preambles/pre_0_packages}    %% loading packages
+\input{Preambles/pre_1_options}     %% settings and various options for packages
+\input{Preambles/pre_2_macros}      %% macros
+\input{Preambles/pre_3_tikz}        %% tikz related contents
+\input{Preambles/pre_4_custom_envs} %% custom environments
+
+% main document
+\begin{document}
+%% BOOK
+\iftoggle{book} {%
+    \input{Content/book_example.tex}
+} {}
+
+%% ARTICLE
+\iftoggle{article} {%
+    \input{Content/article_example.tex}
+} {}
+
+%% EXAM
+\iftoggle{exam} {%
+    \input{Content/exam_example.tex}
+} {}
+
+%% BEAMER
+\iftoggle{beamer} {%
+    \input{Content/beamer_example.tex}
+} {}
+\end{document}
