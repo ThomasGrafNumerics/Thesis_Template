@@ -1,6 +1,6 @@
 <div id="lee-logo" align="center">
     <br />
-    <img src="./icons/stable/LeeLogo.svg alt="Lee Logo" width="250"/>
+    <img src="./icons/LeeLogo.svg alt="Lee Logo" width="250"/>
     <h1>VSCodium</h1>
     <h3>LaTeX Thesis Template</h3>
 </div>
